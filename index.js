@@ -27,16 +27,15 @@ app.get("/apps", (req, res) => {
       } else return 0;
     });
   }
-
-  if (
-    genres &&
-    genres !== "Action" &&
-    genres !== "Puzzle" &&
-    genres !== "Strategy" &&
-    genres !== "Casual" &&
-    genres !== "Arcade" &&
-    genres !== "Card"
-  ) {
+  let allowedGenres = [
+    "Action",
+    "Puzzle",
+    "Strategy",
+    "Casual",
+    "Arcade",
+    "Card",
+  ];
+  if (genres && !allowedGenres.includes(genres)) {
     return res.status(400).json({ message: "Genre must be something else" });
   } else if (genres) {
     apps = apps.filter((app) => {
